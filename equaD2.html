@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résolution d'une équation du second degré</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0e1316;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        img {
+            margin-top: 20px;
+            width: 200px;
+            height: auto;
+            display: ruby;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Résolution d'une équation du second degré</h1><br>
+    <h2>Stephane YEMELI Math bot</h2>
+    <form id="quadraticForm">
+        <label for="a">Coefficient a :</label>
+        <input type="number" id="a" required><br>
+
+        <label for="b">Coefficient b :</label>
+        <input type="number" id="b" required><br>
+
+        <label for="c">Coefficient c :</label>
+        <input type="number" id="c" required><br>
+
+        <button type="submit">Calculer</button>
+    </form>
+
+    <div id="result"></div>
+    <img id="einstein" src="../funny/2 equation.PNG" 
+        alt="Trop facile">
+        
+
+
+    <script>
+        document.getElementById('quadraticForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Empêche l'envoi du formulaire
+
+            // Récupération des coefficients
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+
+            // Calcul du discriminant
+            const discriminant = b * b - 4 * a * c;
+
+            let roots;
+            if (discriminant > 0) {
+                // Deux racines réelles distinctes
+                const root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                const root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                roots = `Deux racines réelles distinctes : x1 = ${root1.toFixed(2)}, x2 = ${root2.toFixed(2)}`;
+            } else if (discriminant === 0) {
+                // Une seule racine réelle
+                const root = -b / (2 * a);
+                roots = `Une seule racine réelle : x = ${root.toFixed(2)}`;
+            } else {
+                // Pas de racines réelles
+                roots = "Pas de racines réelles (les racines sont complexes).";
+            }
+
+            // Affichage des résultats
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = roots;
+            resultDiv.style.display = 'block';
+            document.getElementById('einstein').style.display = 'block';
+        });
+    </script>
+    
+</body>
+
+</html>
